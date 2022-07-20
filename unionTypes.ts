@@ -29,3 +29,19 @@ function calculateTax(price: number | string, tax: number) {
     } 
       return price * tax; 
 }
+
+//Array Union Type
+// const stuff: (number | string)[]
+const coords: (Point | Loc)[] = []
+coords.push({ x: 213, y: 442 });
+
+
+//Literal Types 
+let zero: 0 = 0;
+let mood: "Happy" | "Sad" = "Happy";
+mood = "Sad";
+
+//Combining literal values with the pipe character | similar to union types 
+type DayOfWeek = "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday";
+
+let today: DayOfWeek = "Monday";
