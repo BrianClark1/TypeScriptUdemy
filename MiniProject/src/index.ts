@@ -18,7 +18,15 @@ interface Todo {
   completed: boolean;
 }
 
-const todos: Todo[] = [];
+const todos: Todo[] = readTodos();
+todos.forEach(createTodo);
+
+
+function readTodos() {
+  const todosJSON = localStorage.getItem("todos");
+  if (todosJSON === null) return [];
+  return JSON.parse(todosJSON);
+}
 
 //Specifying this is a Submit Event type, so we can compartmentalize the callback func
 function handleSubmit(e: SubmitEvent) {
@@ -29,13 +37,26 @@ function handleSubmit(e: SubmitEvent) {
   };
   createTodo(newTodo);
   todos.push(newTodo);
+
+    saveTodos();
   input.value = "";
 }
 
+function saveTodos() {
+      localStorage.setItem("todos", JSON.stringify(todos));
+}
+
+
 function createTodo(todo: Todo) {
   const newLI = document.createElement("li");
-  const checkbox = document.createElement("input");
-  checkbox.type = "checkbox";
+    const checkbox = document.createElement("input");
+    checkbox.addEventListener("change", () => {
+        todo.completed = checkbox.checked;
+        saveTodos();
+        console.log('change')
+    })
+    checkbox.type = "checkbox";
+    checkbox.checked = todo.completed;
   newLI.append(todo.text);
   list.append(newLI);
   newLI.append(checkbox);
