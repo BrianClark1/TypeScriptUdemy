@@ -3,6 +3,6 @@ import type { Person } from "./modules.js";
 console.log(add(3, 4))
 
 
-export default class User implements Person {
+// export default class User implements Person {
 
-}
+// }
